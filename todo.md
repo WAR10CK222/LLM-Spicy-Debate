@@ -1,0 +1,4 @@
+- Improve on Voice and Text to Speech
+- Refactor the code
+- Make it arguments and debate more user friendly
+- Frontend UI
