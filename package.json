@@ -1,34 +1,25 @@
 {
     "name": "LLM_Debate_Chamber",
-    "version": "1.0.0",
-    "main": "dist/index.js",
+    "version": "2.0.0",
     "author": "Shubham Patel",
     "type": "module",
     "license": "MIT",
     "private": true,
+    "workspaces": [
+        "shared",
+        "server",
+        "web"
+    ],
     "scripts": {
-        "build": "tsc",
-        "dev": "tsc && node dist/index.js"
-    },
-    "dependencies": {
-        "@google/generative-ai": "^0.24.1",
-        "@langchain/core": "^1.0.1",
-        "@langchain/google-genai": "^1.0.0",
-        "@langchain/langgraph": "^1.0.1",
-        "@langchain/openai": "^1.0.0",
-        "dotenv": "^17.2.3",
-        "events": "^3.3.0",
-        "express": "^5.1.0",
-        "openai": "^6.7.0",
-        "say": "^0.16.0",
-        "socket.io": "^4.8.1",
-        "winston": "^3.18.3",
-        "zod": "^4.1.12"
+        "dev": "concurrently -k -n court,web -c yellow,cyan \"yarn workspace @court/server dev\" \"yarn workspace @court/web dev\"",
+        "dev:mock": "concurrently -k -n court,web -c yellow,cyan \"yarn workspace @court/server dev:mock\" \"yarn workspace @court/web dev\"",
+        "build": "yarn workspace @court/web build",
+        "start": "yarn workspace @court/server start",
+        "test": "yarn workspace @court/server test",
+        "test:live": "yarn workspace @court/server test:live",
+        "typecheck": "yarn workspace @court/shared typecheck && yarn workspace @court/server typecheck && yarn workspace @court/web typecheck"
     },
     "devDependencies": {
-        "@types/express": "^5.0.4",
-        "@types/node": "^24.9.1",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.9.3"
+        "concurrently": "^10.0.6"
     }
 }
